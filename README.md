@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Judul Halaman</title>
+
+  <!-- SEO dasar -->
+  <meta name="description" content="Deskripsi singkat halaman." />
+  <meta name="author" content="Nama Anda" />
+
+  <!-- Ikon (opsional) -->
+  <!-- <link rel="icon" href="/favicon.ico" /> -->
+
+  <!-- CSS eksternal (opsional) -->
+  <!-- <link rel="stylesheet" href="styles.css" /> -->
+
+  <style>
+    /* Gaya dasar agar terlihat rapi tanpa CSS terpisah */
+    :root {
+      --bg: #0f172a;         /* slate-900 */
+      --card: #111827;       /* gray-900 */
+      --text: #e5e7eb;       /* gray-200 */
+      --muted: #9ca3af;      /* gray-400 */
+      --primary: #22c55e;    /* green-500 */
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      height: 100%;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 10% -10%, #1f2937 0, transparent 60%), var(--bg);
+      color: var(--text);
+    }
+    header, main, footer { padding: 1rem; }
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 1.25rem;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      background: #0b1220;
+      color: #d1d5db;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+    }
+    pre { padding: .75rem; overflow: auto; }
+    .muted { color: var(--muted); }
+    .btn {
+      display: inline-block;
+      padding: .6rem 1rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: #0b1220;
+      color: var(--text);
+      cursor: pointer;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); border-color: rgba(255,255,255,0.25); }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <nav aria-label="Navigasi utama" class="card">
+      <strong>Logo</strong>
+      <!-- Contoh tautan navigasi -->
+      <span style="margin-left:.75rem"><a href="#home">Beranda</a></span>
+      <span style="margin-left:.75rem"><a href="#fitur">Fitur</a></span>
+      <span style="margin-left:.75rem"><a href="#kontak">Kontak</a></span>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="home" class="card" style="margin-bottom:1rem">
+      <h1>Halo, Dunia! 🌍</h1>
+      <p class="muted">Ini adalah kerangka dasar HTML5 untuk memulai proyek web Anda.</p>
+      <button class="btn" id="aksiBtn">Klik Saya</button>
+    </section>
+
+    <section id="fitur" class="card" style="margin-bottom:1rem">
+      <h2>Fitur Dasar</h2>
+      <ul>
+        <li>Struktur HTML5 semantic (header, main, footer, section)</li>
+        <li>Meta tag viewport & charset</li>
+        <li>Gaya minimal bawaan</li>
+        <li>Placeholder CSS/JS eksternal</li>
+      </ul>
+      <details>
+        <summary>Lihat contoh markup</summary>
+        <pre><code>&lt;section&gt;
+  &lt;h2&gt;Judul&lt;/h2&gt;
+  &lt;p&gt;Konten…&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+      </details>
+    </section>
+
+    <section id="kontak" class="card">
+      <h2>Kontak</h2>
+      <form id="formKontak" autocomplete="on">
+        <label for="nama">Nama</label><br />
+        <input id="nama" name="nama" type="text" required placeholder="Nama Anda" />
+        <br /><br />
+        <label for="email">Email</label><br />
+        <input id="email" name="email" type="email" required placeholder="email@contoh.com" />
+        <br /><br />
+        <button class="btn" type="submit">Kirim</button>
+      </form>
+      <p id="status" class="muted" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div class="card">
+      <small class="muted">© <span id="tahun"></span> Projek Anda. Semua hak dilindungi.</small>
+    </div>
+  </footer>
+
+  <!-- JavaScript: contoh interaksi sederhana -->
+  <script>
+    // Set tahun saat ini di footer
+    document.getElementById('tahun').textContent = new Date().getFullYear();
+
+    // Interaksi tombol
+    document.getElementById('aksiBtn').addEventListener('click', () => {
+      alert('Tombol diklik! 🎉');
+    });
+
+    // Validasi ringan form
+    const form = document.getElementById('formKontak');
+    const status = document.getElementById('status');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const nama = data.get('nama');
+      const email = data.get('email');
+
+      if (!nama || !email) {
+        status.textContent = 'Lengkapi nama dan email.';
+        return;
+      }
+
+      // Simulasi kirim (di produksi, kirim ke server via fetch)
+      status.textContent = 'Mengirim...';
+      setTimeout(() => {
+        status.textContent = `Terima kasih, ${nama}! Kami akan menghubungi ${email}.`;
+        form.reset();
+      }, 600);
+    });
+  </script>
+</body>
+</html>
